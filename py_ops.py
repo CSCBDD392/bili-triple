@@ -670,14 +670,12 @@ async def cmd_triple(args, opt):
             await step("coin", lambda: v.pay_coin(num=want_coin, like=False))
 
     # ③ 收藏 —— ⚠️ 收藏接口**必须带收藏夹 id**（只传 rid 会被 B站 400 打回）。
-    #    所以这里先把「默认收藏夹」的 id 找出来：fav-lists 里标题为「默认收藏夹」的那个；
-    #    找不到就退回列表第一个（都是用户自己的收藏夹，收藏到哪儿他都看得见）。
+    #    什么都没指定时用 media_id=2（B站系统收藏夹「稍后再看」，任何账号都有、不会失效）；
+    #    以前退回「默认收藏夹」（id 随账号不同），老账号里可能碰到 401/410 这类已失效的收藏夹。
     if want_fav:
-        mid = fav_mid or num(opt.get("defaultFavId"))
-        if state["favoured"] is True and not mid:
+        mid = fav_mid or num(opt.get("defaultFavId")) or 2
+        if state["favoured"] is True and not fav_mid:
             steps.append({"step": "fav", "ok": True, "skipped": True, "message": "本来就已经收藏了"})
-        elif not mid:
-            steps.append({"step": "fav", "ok": False, "message": "没有可用的收藏夹 id —— 去设置里点「刷新收藏夹」挑一个"})
         else:
             await step("fav", lambda: v.set_favorite(add_media_ids=[mid]))
 

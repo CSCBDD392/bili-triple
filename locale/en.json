@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Bilibili Tripler",
+    "description": "Scan to sign in to Bilibili and like + coin + favorite every video of a chosen uploader; also pick an uploader's videos first and other videos second. Runs through the local Python environment."
+  }
+}

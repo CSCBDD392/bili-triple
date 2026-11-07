@@ -1,0 +1,5 @@
+- insert:
+    - id: bili-triple
+      name: '@local/bili-triple'
+      config:
+        enabled: true

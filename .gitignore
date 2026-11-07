@@ -1,0 +1,5 @@
+# 本机运行时文件
+__pycache__/
+*.pyc
+_state/
+node_modules/
